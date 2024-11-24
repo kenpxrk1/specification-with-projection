@@ -6,6 +6,19 @@ Support Projections with `JpaSpecificationExecutor.findAll(Specification,Pageabl
 >version 1.x.x Spring Data JPA 1.x 
 
 ## How to use
+
+***UPD***
+```xml
+<!-- for Spring Data 3.x & java 17+ -->
+<dependency>
+   <groupId>th.co.geniustree.springdata.jpa</groupId>
+    <artifactId>specification-with-projections</artifactId>
+    <version>3.3.4</version>
+</dependency>
+```
+
+
+
 * add dependency to pom
 ```xml
 <!-- for Spring Data 2.x -->
