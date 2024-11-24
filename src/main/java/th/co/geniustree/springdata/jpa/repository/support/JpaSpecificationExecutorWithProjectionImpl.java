@@ -1,5 +1,28 @@
 package th.co.geniustree.springdata.jpa.repository.support;
 
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.LockModeType;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.NoResultException;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Query;
+import jakarta.persistence.Tuple;
+import jakarta.persistence.TypedQuery;
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Expression;
+import jakarta.persistence.criteria.Fetch;
+import jakarta.persistence.criteria.From;
+import jakarta.persistence.criteria.Join;
+import jakarta.persistence.criteria.JoinType;
+import jakarta.persistence.criteria.Path;
+import jakarta.persistence.criteria.Predicate;
+import jakarta.persistence.criteria.Root;
+import jakarta.persistence.criteria.Selection;
+import jakarta.persistence.metamodel.Attribute;
+import jakarta.persistence.metamodel.Bindable;
+import jakarta.persistence.metamodel.ManagedType;
+import jakarta.persistence.metamodel.PluralAttribute;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.annotation.AnnotationUtils;
@@ -20,24 +43,28 @@ import org.springframework.data.repository.query.MyResultProcessor;
 import org.springframework.data.repository.query.ReturnTypeWarpper;
 import org.springframework.data.repository.query.ReturnedType;
 import org.springframework.data.repository.query.TupleConverter;
-import org.springframework.data.repository.support.PageableExecutionUtils;
+import org.springframework.data.support.PageableExecutionUtils;
 import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 import th.co.geniustree.springdata.jpa.repository.JpaSpecificationExecutorWithProjection;
 
-import javax.persistence.*;
-import javax.persistence.criteria.*;
-import javax.persistence.metamodel.Attribute;
-import javax.persistence.metamodel.Bindable;
-import javax.persistence.metamodel.ManagedType;
-import javax.persistence.metamodel.PluralAttribute;
 import java.io.Serializable;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.AnnotatedElement;
 import java.lang.reflect.Member;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
-import static javax.persistence.metamodel.Attribute.PersistentAttributeType.*;
+import static jakarta.persistence.metamodel.Attribute.PersistentAttributeType.ELEMENT_COLLECTION;
+import static jakarta.persistence.metamodel.Attribute.PersistentAttributeType.MANY_TO_MANY;
+import static jakarta.persistence.metamodel.Attribute.PersistentAttributeType.MANY_TO_ONE;
+import static jakarta.persistence.metamodel.Attribute.PersistentAttributeType.ONE_TO_MANY;
+import static jakarta.persistence.metamodel.Attribute.PersistentAttributeType.ONE_TO_ONE;
 
 
 /**

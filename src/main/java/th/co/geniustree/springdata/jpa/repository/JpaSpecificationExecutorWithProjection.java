@@ -1,6 +1,5 @@
 package th.co.geniustree.springdata.jpa.repository;
 
-import java.io.Serializable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;

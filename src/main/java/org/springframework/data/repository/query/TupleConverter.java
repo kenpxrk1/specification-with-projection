@@ -4,9 +4,14 @@ import org.springframework.core.convert.converter.Converter;
 import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 
-import javax.persistence.Tuple;
-import javax.persistence.TupleElement;
-import java.util.*;
+import jakarta.persistence.Tuple;
+import jakarta.persistence.TupleElement;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class TupleConverter implements Converter<Object, Object> {
